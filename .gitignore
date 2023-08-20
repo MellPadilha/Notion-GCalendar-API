@@ -1,7 +1,12 @@
 .env
+<<<<<<< Updated upstream
 */credentials.json
 .token.json
 .credentials.json
+=======
+GoogleAPI/credentials.json
+token.json
+>>>>>>> Stashed changes
 client_secret.json
 token.pkl
 trying.Ipynb
