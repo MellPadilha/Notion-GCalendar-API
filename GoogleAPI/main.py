@@ -9,16 +9,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-
-# Antes de ver isso lembra de criar o projeto no Gcloud, criar o OAuth
-# e salvar o arquivo de credenciais.json para poder fazer a autenticação
-# Ainda tem que instalar a lib do cliente do google:
-# pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 # AUTH
 def main():
-    cred: None
+    creds = None
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json')
 
@@ -26,22 +21,32 @@ def main():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-            creds = flow.run_local_server(port = 0)
+            flow = InstalledAppFlow.from_client_secrets_file('GoogleAPI/credentials.json', SCOPES)
+            creds = flow.run_local_server(port = 0)            
         with open("token.json", "w") as token:
             token.write(creds.to_json())
 
     try:
-        service = build("calendar", "v3", credentials = creds)
+        service = build('calendar', 'v3', credentials=creds)
+        
+
+        # events = service.events().get(calendarId='primary').execute()
+        calendar_list = service.calendarList().list().execute()
+        # print(calendar_list['items'])       
+        
+        timeMin = '2023-08-14T10:00:00Z'
+        
         page_token = None
         while True:
-            events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+            events = service.events().list(calendarId='mellanie.padilha@gmail.com', pageToken=page_token, timeMin=timeMin).execute()
             for event in events['items']:
-                # print(event['summary'])
-                print(event)
+                # print(event)
+                if event['status'] == 'confirmed':
+                    print (f'Evento:{event["summary"]} \n')
             page_token = events.get('nextPageToken')
             if not page_token:
                 break
+
     except HttpError as error:
         print("Vai de novo", error)
 

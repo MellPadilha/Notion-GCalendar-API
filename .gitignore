@@ -1,4 +1,6 @@
 .env
+.token.json
+.credentials.json
 client_secret.json
 token.pkl
 trying.Ipynb
