@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import datetime
+from datetime import timedelta
 import os.path
 
 from google.auth.transport.requests import Request
@@ -28,24 +29,20 @@ def main():
 
     try:
         service = build('calendar', 'v3', credentials=creds)
-        
+                
+        timeMin = datetime.datetime.utcnow()
+        timeMin = timeMin - timedelta(weeks = 1)
+        timeMin = timeMin.isoformat() + 'Z'     
 
-        # events = service.events().get(calendarId='primary').execute()
-        calendar_list = service.calendarList().list().execute()
-        # print(calendar_list['items'])       
-        
-        timeMin = '2023-08-14T10:00:00Z'
-        
-        page_token = None
-        while True:
-            events = service.events().list(calendarId='mellanie.padilha@gmail.com', pageToken=page_token, timeMin=timeMin).execute()
-            for event in events['items']:
-                # print(event)
-                if event['status'] == 'confirmed':
-                    print (f'Evento:{event["summary"]} \n')
-            page_token = events.get('nextPageToken')
-            if not page_token:
-                break
+        events = service.events().list(calendarId='mellanie.padilha@gmail.com', 
+                                        timeMin=timeMin, 
+                                        singleEvents=True,
+                                        orderBy='startTime').execute()
+        for event in events['items']:
+            if event['status'] == 'confirmed':
+                start = event['start'].get('dateTime', event['start'].get('date'))
+                print (f'Evento:{start}::{event["summary"]} \n')
+
 
     except HttpError as error:
         print("Vai de novo", error)
