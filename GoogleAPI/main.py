@@ -42,6 +42,7 @@ def main():
             if event['status'] == 'confirmed':
                 start = event['start'].get('dateTime', event['start'].get('date'))
                 print (f'Evento:{start}::{event["summary"]} \n')
+                print (event)
 
 
     except HttpError as error:

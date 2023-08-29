@@ -1,6 +1,7 @@
 .env
 */credentials.json
 GoogleAPI/credentials.json
+package-lock.json
 token.json
 client_secret.json
 token.pkl
