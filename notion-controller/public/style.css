@@ -2,12 +2,21 @@
 
 * {
   box-sizing: border-box;
+  /* align-items: center;
+  justify-content: center;
+  align-content: center;
+  text-align: -webkit-center;
+  text-align-last: center; */
+  text-align: -webkit-center;
+  color: white;
 }
 
 body {
   font-family: sans-serif;
   margin: 2em 1em;
   line-height: 1.5em;
+  background-color: black;
+
 }
 
 h1 {
@@ -30,26 +39,29 @@ td {
 }
 
 form {
-  background-color: #eee;
+  background-color: #333333;
   display: grid;
   grid-gap: 1em;
   padding: 1em;
-  max-width: 40ch;
+  max-width: 50ch;
+  border-radius: 20px;
 }
 
 input {
   border: 1px solid silver;
+  background-color: #333333;
   display: block;
   font-size: 16px;
   margin-bottom: 10px;
+  border-radius: 1em;
   padding: 5px;
   width: 100%;
 }
 
 form input[type="submit"] {
-  background-color: #bbbbf2;
+  background-color: #333333;
   border: 2px solid currentColor;
-  border-radius: 0.25em;
+  border-radius: 2em;
   cursor: pointer;
   font-size: inherit;
   line-height: 1.4em;
@@ -60,11 +72,11 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-  background-color: #9292d3;
+  background-color: #585858;
 }
 
 form input[type="submit"]:active {
-  background-color: #b2b2d5;
+  background-color: #585858;
 }
 
 footer {

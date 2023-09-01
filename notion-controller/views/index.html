@@ -16,53 +16,30 @@
   </head>
   <body>
     <header>
-      <h1>Notion internal integration demo</h1>
+      <h1>API de sincronização do Google calendar</h1>
     </header>
 
-    <main>
-      <h2>Goals</h2>
-      <p>
-        Use this demo to see how to incorporate Notion's public API into your
-        app. Build on this demo as needed to meet your own app's requirements!
-      </p>
-      <p>
-        Open the Notion page set in your environment variables to see workspace
-        updates in real-time. :)
-      </p>
-      <table>
-        <tr>
-          <th>Step</th>
-          <th>Response</th>
-        </tr>
-        <tr>
-          <td>
-            <h3>1. Create a new database</h3>
-            <form id="databaseForm">
-              <label for="dbName">Database name</label>
-              <input type="text" id="dbName" />
-              <input type="submit" />
-            </form>
-          </td>
-          <!-- The database form response will be appended here after submitting it -->
-          <td id="dbResponse"></td>
-        </tr>
-        <tr>
-          <td>
-            <h3>2. Add a page to the database</h3>
-            <form id="pageForm">
-              <label for="newPageDB">Parent DB ID</label>
-              <input type="text" id="newPageDB" />
-              <label for="newPageName">New page name</label>
-              <input type="text" id="newPageName" />
-              <label for="header">Header 1</label>
-              <input type="text" id="header" />
-              <input type="submit" />
-            </form>
-          </td>
-          <!-- The page form response will be appended here after submitting it -->
-          <td id="pageResponse"></td>
-        </tr>
-        <tr>
+    <main class="container">
+      <div>
+        <form id="pageForm">
+          <h3>Id da database</h3>
+          <label for="dbId">Id</label>
+          <input type="text" id="dbId" />
+          <h3>Key de acesso a API</h3>
+          <label for="apikey">Chave de acesso</label>
+          <input type="text" id="apiKey" />
+          <!-- <p id="dbResponse"></p> -->
+          <h3>Add a page to the database</h3>
+          <label for="newPageDB">Parent DB ID</label>
+          <input type="text" id="newPageDB" />
+          <label for="newPageName">New page name</label>
+          <input type="text" id="newPageName" />
+          <label for="header">Header 1</label>
+          <input type="text" id="header" />
+          <input type="submit" />
+        </form>
+        <!-- <p id="pageResponse"></p> -->
+        <!-- <tr>
           <td>
             <h3>3. Add content to the page</h3>
             <form id="blocksForm">
@@ -73,24 +50,9 @@
               <input type="submit" />
             </form>
           </td>
-          <!-- The page content/blocks form response will be appended here after submitting it -->
           <td id="blocksResponse"></td>
-        </tr>
-        <tr>
-          <td>
-            <h3>4. Add a comment to the content</h3>
-            <form id="commentForm">
-              <label for="pageIDComment">Page ID</label>
-              <input type="text" id="pageIDComment" />
-              <label for="comment">Comment</label>
-              <input type="text" id="comment" />
-              <input type="submit" />
-            </form>
-          </td>
-          <!-- The comment form response will be appended here after submitting it -->
-          <td id="commentResponse"></td>
-        </tr>
-      </table>
+        </tr> -->
+      </div>
     </main>
   </body>
 </html>
