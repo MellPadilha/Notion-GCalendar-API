@@ -19,7 +19,7 @@ export default async function main(){
                         "title": [
                             {
                                 "text": {
-                                    "content": event.summary
+                                    "content": event.name
                                 }
                             }
                         ]

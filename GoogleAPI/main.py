@@ -3,6 +3,8 @@ from __future__ import print_function
 import datetime
 from datetime import timedelta
 import os.path
+import json
+
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -32,7 +34,7 @@ def main():
                 
         timeMin = datetime.datetime.utcnow()
         timeMin = timeMin - timedelta(weeks = 1)
-        timeMin = timeMin.isoformat() + 'Z'     
+        timeMin = timeMin.isoformat() + 'Z'  
 
         events = service.events().list(calendarId='mellanie.padilha@gmail.com', 
                                         timeMin=timeMin, 
@@ -41,9 +43,9 @@ def main():
         for event in events['items']:
             if event['status'] == 'confirmed':
                 start = event['start'].get('dateTime', event['start'].get('date'))
-                print (f'Evento:{start}::{event["summary"]} \n')
-                print (event)
-
+                end = event['end'].get('dateTime', event['end'].get('date'))
+                print (f'Evento:{start}::{event["summary"]} --- {end} \n')
+                print(f'{event["id"]}')
 
     except HttpError as error:
         print("Vai de novo", error)

@@ -47,45 +47,74 @@ app.post("/databases", async function (request, response) {
 
 // Create new page. The database ID is provided in the web form.
 app.post("/pages", async function (request, response) {
-  const { dbID, pageName, header } = request.body
+  const { pageName,  startDate, endDate, eventId } = request.body
 
   try {
     const newPage = await notion.pages.create({
       parent: {
         type: "database_id",
-        database_id: dbID,
+        database_id: process.env.KEY_PAGE,
       },
       properties: {
         Name: {
-          title: [
-            {
-              text: {
-                content: pageName,
-              },
-            },
-          ],
+            title: [
+                {
+                  text: {
+                      content: pageName
+                  }
+                }
+            ]
         },
-      },
-      children: [
-        {
-          object: "block",
-          heading_2: {
-            rich_text: [
-              {
-                text: {
-                  content: header,
-                },
-              },
-            ],
-          },
+        EventID: {
+          rich_text: [{
+            text: {
+              content: eventId
+            }
+          }]
         },
-      ],
+        Start: {
+            date: {
+                  start: startDate
+                }
+        },
+        End: {
+            date: {
+                  start: endDate
+                }
+        }
+    }
     })
     response.json({ message: "success!", data: newPage })
   } catch (error) {
     response.json({ message: "error", error })
   }
 })
+
+// app.post("/update", async function (request, response) {
+//   const { pageID, content } = request.body
+
+
+//   try {
+//     console.log(pageID, content)
+//     const update = await notion.pages.update({
+//       page_id: pageID,
+//       properties: {
+//         PageId: {
+//           rich_text: [
+//             {
+//               text: {
+//                 content: content,
+//               },
+//             },
+//           ],
+//         },
+//       },
+//     });
+//     response.json({ message: "success!", data: update })
+//   } catch (error) {
+//     response.json({ message: "error", error })
+//   }
+// })
 
 // Create new block (page content). The page ID is provided in the web form.
 app.post("/blocks", async function (request, response) {
