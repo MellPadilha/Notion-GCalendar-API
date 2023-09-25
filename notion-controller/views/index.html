@@ -17,6 +17,7 @@
   <body>
     <header>
       <h1>API de sincronização do Google calendar</h1>
+      <button class="buttonSync" onclick="syncEvents()" >Sincronizar agenda</button>
     </header>
 
     <main class="container">
@@ -34,11 +35,9 @@
           <input type="text" id="newPageDB" />
           <label for="newPageName">New page name</label>
           <input type="text" id="newPageName" />
-          <label for="header">Header 1</label>
-          <input type="text" id="header" />
           <input type="submit" />
         </form>
-        <!-- <p id="pageResponse"></p> -->
+        <p id="pageResponse"></p>
         <!-- <tr>
           <td>
             <h3>3. Add content to the page</h3>
