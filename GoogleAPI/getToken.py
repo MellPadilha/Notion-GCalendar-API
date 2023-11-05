@@ -7,18 +7,18 @@ SCOPES= ["https://www.googleapis.com/auth/calendar"]
 
 def getToken():
     
-    flow = InstalledAppFlow.from_client_secrets_file("credentials.json", scopes=SCOPES)
+    flow = InstalledAppFlow.from_client_secrets_file("../Credenciais/credentials.json", scopes=SCOPES)
     flow.run_local_server()
-    pickle.dump(flow.credentials, open("token.pkl", "wb"))
+    pickle.dump(flow.credentials, open("../Credenciais/token.pkl", "wb"))
 
-    return pickle.load(open("token.pkl", "rb"))
+    return pickle.load(open("../Credenciais/token.pkl", "rb"))
 
-def getCalendarId():
+def Autentication():
 
     creds = None
 
-    if os.path.exists('token.pkl'):
-        creds = pickle.load(open("token.pkl", "rb"))
+    if os.path.exists('../Credenciais/token.pkl'):
+        creds = pickle.load(open("../Credenciais/token.pkl", "rb"))
 
     if not creds or not creds.valid:
 
