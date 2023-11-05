@@ -3,6 +3,7 @@ from google.auth.transport.requests import Request
 import pickle
 import os.path
 
+
 SCOPES= ["https://www.googleapis.com/auth/calendar"]
 
 def getToken():
@@ -29,3 +30,10 @@ def Autentication():
             getToken()
     
     return creds
+
+
+
+
+
+
+
